@@ -5,7 +5,7 @@ from netfilterqueue import NetfilterQueue
 import scapy.all as scp
 
 class SimpleFirewall:
-    def _init_(self):
+    def __init__(self):
         # --- SETTINGS ---
         self.max_syn_requests = 20    # Allowed SYN packets within the interval
         self.max_unique_ports = 10    # Allowed unique ports scanned within the interval
@@ -18,7 +18,7 @@ class SimpleFirewall:
 
         #LOGGING SETUP
         # Ensure the log file is created in the same directory as the script
-        current_directory = os.path.dirname(os.path.abspath(_file_))
+        current_directory = os.path.dirname(os.path.abspath(__file__))
         log_file_path = os.path.join(current_directory, "firewall_alerts.log")
         
         logging.basicConfig(
@@ -135,6 +135,6 @@ class SimpleFirewall:
             nfq_instance.unbind()
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     shield = SimpleFirewall()
     shield.boot()
